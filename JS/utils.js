@@ -1,17 +1,17 @@
 
-/**
- * This code can be accessed by the link
- * 'https://github.com/StivsGit/utils/raw/main/JS/utils.js'
- * 
- * and it can be required using the module 'require-from-url'
- * or any other similar modules (or ways).
- */
+// This code can be accessed by the link
+// 'https://github.com/StivsGit/utils/raw/main/JS/utils.js'
+// and it can be required using the module 'require-from-url'
+// or any other similar modules (or ways).
 
 /**
- * this module contains utilities (functions)
+ * this module contains utilities (functions, classes)
  * to be used by other programs.
  * */
 class log{
+    /**
+     * this class is not completed yet
+     */
     #normalLog;
     #errorLog;
     constructor(normalLog = process.stdout, errorLog = process.stderr){
@@ -31,17 +31,23 @@ class log{
         return this.#errorLog;
     }
 }
- function clog(data){
+function cLog(data){
+    /**
+     * this is a short hand to console.log()
+     */
+    return console.log(data);
+}
+function eLog(data){
      /**
-      * this is a short hand to console.log() vbvc
+      * this is a short hand to console.error()
       */
-     return console.log(data);
+     return console.error(data)
  }
 
 function wait(duration){
      /**
       * this will return a promise to be
-      * fullfiled after the given duration
+      * fulfilled after the given duration
       */
      return new Promise((resolve) =>{
          setTimeout(resolve,duration)
@@ -59,6 +65,6 @@ function wait(duration){
      return processor(...args);
  }
 
- exports.clog = clog;
+ exports.clog = cLog;
  exports.wait = wait;
  exports.waitThenGet = waitThenGet;
