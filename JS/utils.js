@@ -65,6 +65,7 @@ function wait(duration){
      return processor(...args);
  }
 
- exports.clog = cLog;
+ exports.cLog = cLog;
+ exports.eLog = eLog;
  exports.wait = wait;
  exports.waitThenGet = waitThenGet;
