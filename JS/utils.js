@@ -1,6 +1,6 @@
 
 // This code can be accessed by the link
-// 'https://github.com/StivsGit/utils/raw/main/JS/utils.js'
+// 'https://github.com/Estifanos-Neway/utils/raw/main/JS/utils.js'
 // and it can be required using the module 'require-from-url'
 // or any other similar modules (or ways).
 
