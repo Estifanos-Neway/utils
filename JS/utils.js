@@ -8,80 +8,55 @@
  * this module contains utilities (functions, classes)
  * to be used by other programs.
  * */
-class log {
-    /**
-     * this class is not completed yet
-     */
-    #normalLog;
-    #errorLog;
-    constructor(normalLog = process.stdout, errorLog = process.stderr) {
-        setNormalLog(normalLog);
-        setErrorLog(errorLog);
+
+class js_utils{
+    cLog(data) {
+        /**
+         * this is a short hand to console.log()
+         */
+        return console.log(data);
     }
-    set setNormalLog(stream) {
-        this.#normalLog = stream;
+    
+    eLog(data) {
+        /**
+         * this is a short hand to console.error()
+         */
+        return console.error(data)
     }
-    get getNormalLog() {
-        return this.#normalLog;
+    
+    wait(duration) {
+        /**
+         * this will return a promise to be
+         * fulfilled after the given duration
+         */
+        return new Promise((resolve) => {
+            setTimeout(resolve, duration)
+        })
     }
-    set setErrorLog(stream) {
-        this.#errorLog = stream;
+    
+    async waitThenGet(duration, processor, ...args) {
+        /**
+         * this will wait for the given duration
+         * then return the return value of the
+         * given function after execute it with
+         * the given aguments.
+         */
+        await wait(duration);
+        return processor(...args);
     }
-    get getErrorLog() {
-        return this.#errorLog;
+    
+    notifyError(errorText, logText, exit) {
+        /**
+         * this func. will write to the error log
+         * and console log then exit the process
+         * if the 'exit' argument is truthy.
+         */
+        errorText = errorText ? errorText : "unmentioned error";
+        logText = logText ? logText : "";
+        eLog(errorText);
+        cLog(logText);
+        exit ? process.exit() : "";
     }
 }
 
-function cLog(data) {
-    /**
-     * this is a short hand to console.log()
-     */
-    return console.log(data);
-}
-
-function eLog(data) {
-    /**
-     * this is a short hand to console.error()
-     */
-    return console.error(data)
-}
-
-function wait(duration) {
-    /**
-     * this will return a promise to be
-     * fulfilled after the given duration
-     */
-    return new Promise((resolve) => {
-        setTimeout(resolve, duration)
-    })
-}
-
-async function waitThenGet(duration, processor, ...args) {
-    /**
-     * this will wait for the given duration
-     * then return the return value of the
-     * given function after execute it with
-     * the given aguments.
-     */
-    await wait(duration);
-    return processor(...args);
-}
-
-function notifyError(errorText, logText, exit) {
-    /**
-     * this func. will write to the error log,
-     * console log and exit the process the 'exit'
-     * argument is truthy.
-     */
-    errorText = errorText ? errorText : "unknown error";
-    logText = logText ? logText : "";
-    eLog(errorText);
-    cLog(logText);
-    exit ? process.exit() : "";
-}
-
-exports.cLog = cLog;
-exports.eLog = eLog;
-exports.wait = wait;
-exports.waitThenGet = waitThenGet;
-exports.notifyError = notifyError;
+module.exports = new js_utils();
